@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BackendController\CategoryController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Backendcontroller\LogoController;
 use App\Http\Controllers\BackendController\ProductController;
 use App\Http\Controllers\BackendController\ProfileController;
@@ -80,6 +82,21 @@ Route::middleware(['auth'])->group(function(){
 
 });
 
+/// 🛒 ក្រុម Route ខាងក្រៅ (ភ្ញៀវមិនទាន់ Login ក៏អាចមើល និងកុម្ម៉ង់ទិញបាន)
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::patch('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+
+Route::get('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
+
+// 💡 ដំណោះស្រាយ៖ ត្រូវយក Route ទាំង ៣ នេះមកដាក់នៅខាងក្រៅក្រុម auth ដែរ
+Route::post('/payment/cash', [PaymentController::class, 'cashOnDelivery'])->name('payment.cash');
+Route::post('/payment/stripe', [PaymentController::class, 'stripePayment'])->name('payment.stripe');
+Route::get('/payment/success/{orderNumber}', [PaymentController::class, 'success'])->name('payment.success');
 
 
-
+// 🔒 ក្រុម Route ខាងក្នុង (ទុកសម្រាប់មុខងារណាដែលចាំបាច់ទាល់តែ Login ពិតប្រាកដ)
+Route::middleware('auth')->group(function () {
+    // អ្នកអាចដាក់ Route ផ្សេងៗដូចជា Dashboard, Profile, or Order History នៅទីនេះ...
+});

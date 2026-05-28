@@ -75,7 +75,7 @@ class ProductController extends Controller
             {
                 $product = Product::findOrFail($id);
                 $sizes = ['XS', 'S', 'M', 'L', 'XL']; 
-                return view('frontend.product.show', compact('product', 'sizes'));
+                return view('frontend.Checkout', compact('product', 'sizes'));
             }
             
         }

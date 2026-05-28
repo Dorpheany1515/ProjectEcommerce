@@ -17,8 +17,6 @@ return new class extends Migration
             $table->integer('qty');
             $table->decimal('regular_price', 10, 2);
             $table->decimal('sale_price',10,2);
-            $table->string('color');
-            $table->string('size');
             $table->longText('image');
             $table->longText('description');
             $table->integer('views')->default(0);

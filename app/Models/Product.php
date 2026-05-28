@@ -21,4 +21,7 @@ class Product extends Model
         'image',
         'user_id'
     ];
+   public function category() {
+    return $this->belongsTo(category::class, 'cate_id', 'id'); // 💡 ប្រើ c តូច ទៅតាមឈ្មោះ Class របស់អ្នក
+    }
 }

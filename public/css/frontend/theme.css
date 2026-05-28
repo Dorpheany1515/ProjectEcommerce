@@ -144,7 +144,6 @@ figure .thumbnail .status {
     background-color: var(--pink);
 }
 
-
 .product-detail .review .detail .price-list ,
 .product-detail .review .detail .title ,
 .product-detail .review .detail .group-size {
@@ -171,6 +170,7 @@ figure .thumbnail .status {
     margin-top: 10px;
 }
 
+/* Shop Filter & Pagination */
 .shop .filter .title {
     font-weight: bold;
 }
@@ -226,6 +226,7 @@ figure .thumbnail .status {
     position: relative;
 }
 
+/* News Blog */
 .news-blog .detail {
     padding: 10px 0px !important;
 }
@@ -240,4 +241,22 @@ figure .thumbnail .status {
 }
 .news-detail .detail .top span {
     font-weight: bold;
+}
+
+/* * 🛠️ ផ្នែកបន្ថែមថ្មី៖ បង្រួមទំហំរូបសញ្ញាព្រួញ (Pagination Icons)
+ * ការពារមិនឱ្យ SVG លោតឡើងធំប៉ុនអេក្រង់ 
+ */
+.shop .pagination svg, 
+.pagination svg,
+svg.w-5,
+svg.h-5 {
+    width: 20px !important;   /* កំណត់ទទឹងរូបសញ្ញាព្រួញឱ្យនៅសល់ត្រឹម 20px */
+    height: 20px !important;  /* កំណត់កម្ពស់រូបសញ្ញាព្រួញឱ្យនៅសល់ត្រឹម 20px */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* បង្រួមទំហំអក្សរ និងប្រអប់ដែលមិនចាំបាច់របស់ Laravel Pagination */
+.pagination nav div:first-child {
+    display: none !important; /* លាក់ប្រអប់បង្ហាញចំនួនទិន្នន័យ "Showing X to Y of Z results" ចេញ */
 }

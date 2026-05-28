@@ -29,8 +29,6 @@ class ProductController extends Controller
             'regular_price' => 'required',
             'sale_price' => 'required|numeric|min:0|max:99999999.99',
             'cate_id'=> 'required',
-            'size'=> 'required|max:50',
-            'color'=> 'required|max:50',
             'description'=> 'required',
 
         ]);
@@ -45,8 +43,6 @@ class ProductController extends Controller
             $input['image']=$request->old_image;
         }
 
-        $input['size']=implode(',',$request->size);
-        $input['color']=implode(',',$request->color);
         $input['user_id']=auth()->user()->id;
         $btn=$request->btn;
         if($btn=='Add Product'){
@@ -76,10 +72,8 @@ class ProductController extends Controller
                 ->select('product.*','category.category_name as category')
                 ->where('product.id',$product->id)
                 ->first();
-        $size=explode(',',$product->size);
-        $color=explode(',',$product->color);
         $category=Category::query()->get();
-        return view('backend.addProduct',compact('getCate','category','size','color'));
+        return view('backend.addProduct',compact('getCate','category'));
     }
 
     }

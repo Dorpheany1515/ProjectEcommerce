@@ -8,15 +8,14 @@
         <link href="{{ url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     </head>
     <body>
-        <header>
-                <div class="container">
+        <header class=" bg-primary-subtle">
+            <div class="container">
                     <div class="logo">
-                        <a href="">
-                           <h1>
-                             KH FASHION
-                           </h1>
-                        </a>
+                            <a href="/">
+                                <h1>E-BOOK</h1>
+                            </a>
                     </div>
+                
                     <ul class="menu">
                         <li>
                             <a href="/">HOME</a>
@@ -65,3 +64,39 @@
     </body>
     <script src="{{ url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js') }}"></script>
 </html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('.btn-add-cart').on('click', function(e) {
+        e.preventDefault();
+        
+        let button = $(this);
+        let form = button.closest('.add-to-cart-form');
+        let url = form.data('url');
+        let token = form.find('input[name="_token"]').val();
+
+        // ប្តូរអក្សរលើប៊ូតុងបណ្តោះអាសន្នពេលកំពុងដំណើរការ
+        button.prop('disabled', true).text('Adding...');
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                _token: token
+            },
+            success: function(response) {
+                // រក្សាប៊ូតុងឲ្យមកសភាពដើម
+                button.prop('disabled', false).text('Add to cart');
+                
+                // បង្ហាញផ្ទាំងសារ Notification តូចមួយស្អាត ដោយមិនបាច់ Reload ទំព័រ
+                alert(response.message);
+            },
+            error: function(xhr) {
+                button.prop('disabled', false).text('Add to cart');
+                alert('មានបញ្ហាអ្វីមួយបានកើតឡើង ឬលោកអ្នកមិនទាន់បានបើក Database!');
+            }
+        });
+    });
+});
+</script>
