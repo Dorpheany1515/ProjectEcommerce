@@ -19,9 +19,9 @@ class Product extends Model
         'color',
         'description',
         'image',
-        'user_id'
+        'user_id'0
     ];
    public function category() {
-    return $this->belongsTo(category::class, 'cate_id', 'id'); // 💡 ប្រើ c តូច ទៅតាមឈ្មោះ Class របស់អ្នក
+    return $this->belongsTo(category::class, 'cate_id', 'id'); 
     }
 }

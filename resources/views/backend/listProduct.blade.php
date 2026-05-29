@@ -98,7 +98,6 @@
 @section('script')
 <script>
     $(document).ready(function(){
-        // ចាប់យក ID ផលិតផលនៅពេលចុចប៊ូតុង Delete ដើម្បីដាក់ក្នុង Modal
         $('.remove-post-key').click(function(){
             var id = $(this).attr('data-value');
             $('#remove-val').val(id);
